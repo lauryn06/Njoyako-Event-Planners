@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organiser Dashboard | NJOYAKO Event Management</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1><i class="fa-solid fa-calendar-check"></i> Organiser Dashboard</h1>
+    <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </header>
+
+  <main class="dashboard-container">
+    <section class="welcome-section">
+      <h2 id="welcomeMessage"></h2>
+      <p>Manage all your events and attendees from here.</p>
+    </section>
+
+    <section class="dashboard-grid">
+      <!-- Organiser Core Actions -->
+      <div class="card">
+        <i class="fa-solid fa-plus-circle"></i>
+        <h3>Create Event</h3>
+        <p>Plan and create a new event.</p>
+        <button onclick="navigateTo('create_event.html')">Create</button>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-sliders"></i>
+        <h3>Customize Event</h3>
+        <p>Edit event details, schedule, and more.</p>
+        <button onclick="navigateTo('customize_event.html')">Customize</button>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <h3>Manage Guest List</h3>
+        <p>Add or remove guests and track RSVPs.</p>
+        <button onclick="navigateTo('guest_list.html')">Manage</button>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Generate Reports</h3>
+        <p>View attendance, revenue, and other metrics.</p>
+        <button onclick="navigateTo('reports.html')">Generate</button>
+      </div>
+
+      <!-- Shared Tools -->
+      <div class="card">
+        <i class="fa-solid fa-comments"></i>
+        <h3>Chatbox</h3>
+        <p>Communicate with attendees or staff.</p>
+        <button onclick="navigateTo('chat.html')">Open Chat</button>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-bell"></i>
+        <h3>Notifications</h3>
+        <p>View alerts and updates for your events.</p>
+        <button onclick="navigateTo('notifications.html')">View</button>
+      </div>
+
+      <!-- Upcoming Events Preview -->
+      <div class="card full-width">
+        <i class="fa-solid fa-calendar-days"></i>
+        <h3>Upcoming Events</h3>
+        <ul id="upcomingEvents">
+          <li>No events yet.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | All Rights Reserved</p>
+  </footer>
+
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Role check: redirect non-organisers to dashboard1
+    const role = localStorage.getItem('role') || 'user';
+    if (role !== 'organiser') {
+      window.location.href = 'dashboard1.html';
+      return; // stop further execution
+    }
+
+    // Welcome message
+    const welcome = document.getElementById('welcomeMessage');
+    welcome.textContent = `Welcome Organiser!`;
+
+    // Logout button
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('role');
+      window.location.href = 'index.html';
+    });
+
+    // Navigation function
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    window.navigateTo = navigateTo; // expose globally for button onclicks
+
+    // Example: Load upcoming events dynamically
+    const upcomingEvents = document.getElementById('upcomingEvents');
+    const events = [
+      "Annual Music Festival - 20 Oct 2025",
+      "Tech Conference 2025 - 5 Nov 2025",
+      "Charity Gala - 15 Dec 2025"
+    ];
+    upcomingEvents.innerHTML = events.map(e => `<li>${e}</li>`).join('');
+  });
+</script>
+
+
+</body>
+</html>
+

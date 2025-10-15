@@ -7,7 +7,6 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
@@ -23,61 +22,64 @@
     </section>
 
     <section class="dashboard-grid">
-      <!-- Organiser and User Shared Actions -->
+      <!-- Shared Actions -->
       <div class="card">
         <i class="fa-solid fa-magnifying-glass"></i>
         <h3>Search Events</h3>
         <p>Find and explore upcoming events.</p>
-        <button>Search</button>
+        <a href="search_events.html" class="btn">Search</a>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-ticket"></i>
         <h3>Purchase Ticket</h3>
         <p>Buy tickets for your favorite events.</p>
-        <button>Buy Now</button>
+        <a href="purchase_ticket.html" class="btn">Buy Now</a>
       </div>
 
+      <!-- Organiser Actions -->
       <div class="card organiser-only">
         <i class="fa-solid fa-plus-circle"></i>
         <h3>Create Event</h3>
         <p>Plan and create a new event.</p>
-        <button>Create</button>
+        <button class="btn" onclick="navigateTo('create_event.html')">Create</button>
       </div>
 
       <div class="card organiser-only">
         <i class="fa-solid fa-sliders"></i>
         <h3>Customize Event</h3>
         <p>Adjust and personalize your event details.</p>
-        <button>Customize</button>
+        <button class="btn" onclick="navigateTo('customize_event.html')">Customize</button>
       </div>
 
+      <!-- Shared Tools -->
       <div class="card">
         <i class="fa-solid fa-comments"></i>
         <h3>Chatbox</h3>
         <p>Chat with users and organisers.</p>
-        <button>Open Chat</button>
+        <a href="chat.html" class="btn">Open Chat</a>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-bell"></i>
         <h3>Notifications</h3>
         <p>View your alerts and updates.</p>
-        <button>View</button>
+        <a href="notifications.html" class="btn">View</a>
       </div>
 
+      <!-- Organiser-only Tools -->
       <div class="card organiser-only">
         <i class="fa-solid fa-clipboard-list"></i>
         <h3>Manage Guest List</h3>
         <p>Add or remove guests for your events.</p>
-        <button>Manage</button>
+        <button class="btn" onclick="navigateTo('guest_list.html')">Manage</button>
       </div>
 
-      <div class="card">
+      <div class="card organiser-only">
         <i class="fa-solid fa-chart-line"></i>
         <h3>Generate Reports</h3>
         <p>View reports and attendance summaries.</p>
-        <button>Generate</button>
+        <button class="btn" onclick="navigateTo('reports.html')">Generate</button>
       </div>
     </section>
   </main>
@@ -87,22 +89,32 @@
   </footer>
 
   <script>
-    const userRole = localStorage.getItem('role'); // Could be set after login in real app
-    const welcome = document.getElementById('welcomeMessage');
-
-    // Fallback role (for demo only)
+    // Simulate role (replace with real login storage later)
+    const userRole = localStorage.getItem('role');
     const role = userRole || 'user';
+    const welcome = document.getElementById('welcomeMessage');
     welcome.textContent = `Welcome ${role.charAt(0).toUpperCase() + role.slice(1)}!`;
 
-    // Hide organiser-only cards if user is not organiser
+    // Hide organiser-only cards for normal users
     if (role !== 'organiser') {
       document.querySelectorAll('.organiser-only').forEach(card => card.style.display = 'none');
     }
 
-    // Logout
+    // Logout button
     document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('role');
       window.location.href = 'index.html';
     });
+
+    // Function to navigate to organiser pages
+    function navigateTo(page) {
+      if (role === 'organiser') {
+        window.location.href = page;
+      } else {
+        alert("You don't have permission to access this page.");
+      }
+    }
   </script>
 </body>
 </html>
+
