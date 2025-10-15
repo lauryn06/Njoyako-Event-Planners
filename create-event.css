@@ -1,3 +1,4 @@
+/* Root colors and variables (optional, if not in dashboard.css already) */
 :root {
   --primary: #4b6cb7;
   --secondary: #182848;
@@ -7,19 +8,14 @@
   --radius: 1rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
   background: var(--bg);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
   color: var(--text-dark);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 /* Navbar */
@@ -34,153 +30,110 @@ body {
 }
 
 .navbar h1 {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
   font-size: 1.3rem;
-}
-
-.navbar nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
-.navbar a, .navbar button {
-  background: white;
+.btn, .card button {
+  background: var(--primary);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn:hover, .card button:hover {
+  background: var(--secondary);
+}
+
+
+.navbar button {
+  background: #fff;
   color: var(--secondary);
   border: none;
   padding: 0.6rem 1rem;
   border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: bold;
   cursor: pointer;
+  font-weight: bold;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
 }
 
-.navbar a:hover, .navbar button:hover {
+.navbar button:hover {
   background: var(--secondary);
   color: white;
 }
 
-/* Main Layout */
-.create-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-/* Form Section */
-.form-section {
-  flex: 1 1 450px;
+/* Form container */
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
   background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.form-section h2 {
+.form-container h2 {
   color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  text-align: center;
   margin-bottom: 1.5rem;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.2rem;
-}
-
-.form-group label {
-  font-weight: 600;
-  color: var(--secondary);
-  margin-bottom: 0.3rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--primary);
-  outline: none;
-  box-shadow: 0 0 0.3rem rgba(75, 108, 183, 0.4);
-}
-
-.buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-}
-
-.buttons button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-button.save {
-  background: var(--primary);
-  color: white;
-}
-
-button.cancel {
-  background: #ccc;
-  color: black;
-}
-
-button.save:hover {
-  background: var(--secondary);
-}
-
-button.cancel:hover {
-  background: #999;
-}
-
-/* Preview Section */
-.preview-section {
-  flex: 1 1 300px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-}
-
-.preview-section h3 {
-  color: var(--secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
-.preview-card {
-  line-height: 1.6;
-  font-size: 0.95rem;
-  background: #f8f8f8;
-  padding: 1rem;
-  border-radius: 0.6rem;
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group button {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-group button:hover {
+  background: var(--secondary);
+}
+
+#message {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 /* Footer */
@@ -191,22 +144,4 @@ footer {
   background: #eee;
   font-size: 0.9rem;
   color: #666;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .create-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .form-section,
-  .preview-section {
-    width: 95%;
-  }
-
-  .buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
 }

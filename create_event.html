@@ -3,85 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Event | NJOYAKO</title>
-
+  <title>Create Event | NJOYAKO Event Management</title>
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+  
+  <!-- Create Event CSS -->
   <link rel="stylesheet" href="create-event.css" />
 </head>
 <body>
+
   <header class="navbar">
-    <h1><i class="fa-solid fa-calendar-plus"></i> Create New Event</h1>
-    <nav>
-      <a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
-      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-    </nav>
+    <h1><i class="fa-solid fa-calendar-plus"></i> Create Event</h1>
+    <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </header>
 
-  <main class="create-container">
-    <section class="form-section">
-      <h2><i class="fa-solid fa-pen-to-square"></i> Event Details</h2>
+  <main>
+    <div class="form-container">
+      <h2>Create a New Event</h2>
+    <!-- Back to Dashboard Button -->
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <button id="backBtn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+      <div id="message"></div>
       <form id="createEventForm">
         <div class="form-group">
-          <label for="eventName"><i class="fa-solid fa-signature"></i> Event Name</label>
-          <input type="text" id="eventName" placeholder="Enter event name" required />
+          <label for="title">Event Title</label>
+          <input type="text" id="title" required>
         </div>
 
         <div class="form-group">
-          <label for="eventDate"><i class="fa-solid fa-calendar-days"></i> Date</label>
-          <input type="date" id="eventDate" required />
+          <label for="description">Description</label>
+          <textarea id="description" rows="4" required></textarea>
         </div>
 
         <div class="form-group">
-          <label for="eventTime"><i class="fa-solid fa-clock"></i> Time</label>
-          <input type="time" id="eventTime" required />
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
         </div>
 
         <div class="form-group">
-          <label for="eventLocation"><i class="fa-solid fa-location-dot"></i> Location</label>
-          <input type="text" id="eventLocation" placeholder="Enter location" required />
+          <label for="time">Time</label>
+          <input type="time" id="time" required>
         </div>
 
         <div class="form-group">
-          <label for="category"><i class="fa-solid fa-list"></i> Category</label>
-          <select id="category" required>
-            <option value="">-- Select Category --</option>
-            <option value="music">Music</option>
-            <option value="conference">Conference</option>
-            <option value="sports">Sports</option>
-            <option value="community">Community</option>
-          </select>
+          <label for="location">Location</label>
+          <input type="text" id="location" required>
         </div>
 
         <div class="form-group">
-          <label for="description"><i class="fa-solid fa-align-left"></i> Description</label>
-          <textarea id="description" rows="4" placeholder="Enter event description"></textarea>
+          <label for="image">Event Image</label>
+          <input type="file" id="image" accept="image/*">
         </div>
 
         <div class="form-group">
-          <label for="image"><i class="fa-solid fa-image"></i> Upload Banner</label>
-          <input type="file" id="image" accept="image/*" />
+          <label for="ticketPrice">Ticket Price (MWK)</label>
+          <input type="number" id="ticketPrice" min="0" required>
         </div>
 
-        <div class="buttons">
-          <button type="submit" class="save"><i class="fa-solid fa-check"></i> Save Event</button>
-          <button type="reset" class="cancel"><i class="fa-solid fa-xmark"></i> Cancel</button>
+        <div class="form-group">
+          <label for="ticketQuantity">Ticket Quantity</label>
+          <input type="number" id="ticketQuantity" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Create Event</button>
         </div>
       </form>
-    </section>
-
-    <aside class="preview-section">
-      <h3><i class="fa-solid fa-eye"></i> Preview</h3>
-      <div class="preview-card">
-        <p><strong>Event Name:</strong> <span id="previewName">–</span></p>
-        <p><strong>Date:</strong> <span id="previewDate">–</span></p>
-        <p><strong>Time:</strong> <span id="previewTime">–</span></p>
-        <p><strong>Location:</strong> <span id="previewLocation">–</span></p>
-        <p><strong>Category:</strong> <span id="previewCategory">–</span></p>
-        <p><strong>Description:</strong> <span id="previewDescription">–</span></p>
-      </div>
-    </aside>
+    </div>
   </main>
 
   <footer>
@@ -89,28 +79,47 @@
   </footer>
 
   <script>
-    // Basic live preview logic (UI only)
-    const form = document.getElementById('createEventForm');
-    const preview = {
-      name: document.getElementById('previewName'),
-      date: document.getElementById('previewDate'),
-      time: document.getElementById('previewTime'),
-      location: document.getElementById('previewLocation'),
-      category: document.getElementById('previewCategory'),
-      desc: document.getElementById('previewDescription')
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+      // Role check: redirect non-organisers
+      const role = localStorage.getItem('role') || 'user';
+      if (role !== 'organiser') {
+        window.location.href = 'dashboard1.html';
+        return;
+      }
 
-    form.addEventListener('input', () => {
-      preview.name.textContent = form.eventName.value || '–';
-      preview.date.textContent = form.eventDate.value || '–';
-      preview.time.textContent = form.eventTime.value || '–';
-      preview.location.textContent = form.eventLocation.value || '–';
-      preview.category.textContent = form.category.value || '–';
-      preview.desc.textContent = form.description.value || '–';
-    });
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('role');
+        window.location.href = 'index.html';
+      });
+      document.getElementById('backBtn').addEventListener('click', () => {
+  window.location.href = 'dashboard1.html';
+});
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      const form = document.getElementById('createEventForm');
+      const message = document.getElementById('message');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Gather form data
+        const eventData = {
+          title: document.getElementById('title').value,
+          description: document.getElementById('description').value,
+          date: document.getElementById('date').value,
+          time: document.getElementById('time').value,
+          location: document.getElementById('location').value,
+          ticketPrice: document.getElementById('ticketPrice').value,
+          ticketQuantity: document.getElementById('ticketQuantity').value
+        };
+
+        console.log('Event Created:', eventData);
+
+        message.style.color = 'green';
+        message.textContent = 'Event created successfully!';
+
+        form.reset();
+      });
     });
   </script>
 </body>
