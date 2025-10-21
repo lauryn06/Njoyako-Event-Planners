@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Events | NJOYAKO</title>
+
+  <link rel="stylesheet" href="user-search.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <h1><i class="fa-solid fa-magnifying-glass"></i> Find Events</h1>
+    <div class="nav-buttons">
+      <button onclick="goHome()"><i class="fa-solid fa-house"></i> Home</button>
+      <button onclick="goProfile()"><i class="fa-solid fa-user"></i> Profile</button>
+    </div>
+  </header>
+
+  <!-- Search and Filter Section -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Search by event name..." />
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+      <option value="music">Music</option>
+      <option value="sports">Sports</option>
+      <option value="tech">Tech</option>
+      <option value="charity">Charity</option>
+      <option value="fashion">Fashion</option>
+    </select>
+    <button id="searchBtn"><i class="fa-solid fa-search"></i> Search</button>
+  </section>
+
+  <!-- Events List -->
+  <main class="event-list" id="eventList">
+    <!-- Events will be loaded here dynamically -->
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | Connecting You to Events that Matter</p>
+  </footer>
+
+  <script>
+    function goHome() {
+      window.location.href = 'index.html';
+    }
+
+    function goProfile() {
+      window.location.href = 'user-profile.html';
+    }
+
+    // Sample Event Data
+    const events = [
+      {
+        name: "Tech Expo 2025",
+        date: "2025-11-10",
+        location: "Blantyre International Conference Centre",
+        category: "tech",
+        image: "images/tech-expo.jpg",
+        description: "Explore innovations, startups, and technology exhibitions across Malawi."
+      },
+      {
+        name: "Blantyre Music Festival",
+        date: "2025-12-05",
+        location: "Kamuzu Stadium",
+        category: "music",
+        image: "images/music-fest.jpg",
+        description: "A thrilling weekend of live performances and DJ mixes from top Malawian artists."
+      },
+      {
+        name: "Charity Gala 2025",
+        date: "2025-11-28",
+        location: "Mount Soche Hotel, Blantyre",
+        category: "charity",
+        image: "images/charity-gala.jpg",
+        description: "Join us for an elegant night of giving back to the community."
+      },
+      {
+        name: "Fashion Week Malawi",
+        date: "2025-11-15",
+        location: "Crossroads Hotel, Lilongwe",
+        category: "fashion",
+        image: "images/fashion-week.jpg",
+        description: "Showcasing Malawian designers and trends in African fashion."
+      }
+    ];
+
+    const eventList = document.getElementById('eventList');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const searchBtn = document.getElementById('searchBtn');
+
+    // Function to display events
+    function displayEvents(filteredEvents) {
+      eventList.innerHTML = '';
+      if (filteredEvents.length === 0) {
+        eventList.innerHTML = '<p class="no-results">No events found.</p>';
+        return;
+      }
+
+      filteredEvents.forEach(event => {
+        const card = document.createElement('div');
+        card.classList.add('event-card');
+        card.innerHTML = `
+          <img src="${event.image}" alt="${event.name}" />
+          <div class="event-info">
+            <h2>${event.name}</h2>
+            <p><i class="fa-solid fa-calendar-days"></i> ${event.date}</p>
+            <p><i class="fa-solid fa-location-dot"></i> ${event.location}</p>
+            <p>${event.description}</p>
+            <button onclick="viewDetails('${event.name}')"><i class="fa-solid fa-eye"></i> View Details</button>
+          </div>
+        `;
+        eventList.appendChild(card);
+      });
+    }
+
+    // Initial load
+    displayEvents(events);
+
+    // Search functionality
+    searchBtn.addEventListener('click', () => {
+      const searchText = searchInput.value.toLowerCase();
+      const category = categoryFilter.value;
+
+      const filtered = events.filter(e =>
+        e.name.toLowerCase().includes(searchText) &&
+        (category === "" || e.category === category)
+      );
+
+      displayEvents(filtered);
+    });
+
+    function viewDetails(eventName) {
+      localStorage.setItem('selectedEvent', eventName);
+      window.location.href = 'event-details.html';
+    }
+  </script>
+</body>
+</html>
