@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Guest List | NJOYAKO Event Management</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="manage_guests.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <h1><i class="fa-solid fa-users"></i> Manage Guest List</h1>
+    <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- Back to Dashboard -->
+      <div style="text-align:center; margin-bottom:1rem;">
+        <button id="backBtn" class="btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+      </div>
+
+      <h2>Guest Management</h2>
+      <p class="subtitle">Add, remove, or update guest details for each event.</p>
+
+      <div class="form-group">
+        <label for="eventSelect">Select Event:</label>
+        <select id="eventSelect">
+          <option value="">-- Choose an Event --</option>
+          <option>Annual Music Festival</option>
+          <option>Tech Conference 2025</option>
+          <option>Charity Gala</option>
+        </select>
+      </div>
+
+      <div class="guest-actions">
+        <input type="text" id="guestName" placeholder="Enter guest name">
+        <input type="email" id="guestEmail" placeholder="Enter guest email">
+        <select id="rsvpStatus">
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Declined">Declined</option>
+        </select>
+        <button id="addGuestBtn" class="btn"><i class="fa-solid fa-user-plus"></i> Add Guest</button>
+      </div>
+
+      <table id="guestTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Guest Name</th>
+            <th>Email</th>
+            <th>RSVP Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic content -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const role = localStorage.getItem('role') || 'user';
+      if (role !== 'organiser') {
+        window.location.href = 'dashboard1.html';
+        return;
+      }
+
+      const eventSelect = document.getElementById('eventSelect');
+      const guestTable = document.querySelector('#guestTable tbody');
+      const addGuestBtn = document.getElementById('addGuestBtn');
+
+      let guestList = [];
+
+      // Logout
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('role');
+        window.location.href = 'index.html';
+      });
+
+      // Back button
+      document.getElementById('backBtn').addEventListener('click', () => {
+        window.location.href = 'dashboard2.html';
+      });
+
+      // Add guest
+      addGuestBtn.addEventListener('click', () => {
+        const name = document.getElementById('guestName').value.trim();
+        const email = document.getElementById('guestEmail').value.trim();
+        const rsvp = document.getElementById('rsvpStatus').value;
+
+        if (!name || !email || !eventSelect.value) {
+          alert('Please fill in all details and select an event.');
+          return;
+        }
+
+        guestList.push({ name, email, rsvp });
+        displayGuests();
+        document.getElementById('guestName').value = '';
+        document.getElementById('guestEmail').value = '';
+      });
+
+      // Display guests in table
+      function displayGuests() {
+        guestTable.innerHTML = '';
+        guestList.forEach((guest, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${guest.name}</td>
+            <td>${guest.email}</td>
+            <td>${guest.rsvp}</td>
+            <td>
+              <button class="editBtn"><i class="fa-solid fa-pen"></i></button>
+              <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          `;
+
+          row.querySelector('.deleteBtn').addEventListener('click', () => {
+            guestList.splice(index, 1);
+            displayGuests();
+          });
+
+          row.querySelector('.editBtn').addEventListener('click', () => {
+            const newRSVP = prompt('Enter new RSVP (Pending / Confirmed / Declined):', guest.rsvp);
+            if (newRSVP) {
+              guestList[index].rsvp = newRSVP;
+              displayGuests();
+            }
+          });
+
+          guestTable.appendChild(row);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
