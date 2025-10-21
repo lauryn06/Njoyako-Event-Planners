@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications | NJOYAKO Event Management</title>
+
+  <link rel="stylesheet" href="notifications.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1><i class="fa-solid fa-bell"></i> Notifications</h1>
+    <div class="nav-buttons">
+      <button onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </header>
+
+  <main class="notifications-container">
+    <h2>Recent Notifications</h2>
+    <ul id="notificationList" class="notification-list">
+      <!-- Notifications will be dynamically loaded here -->
+    </ul>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Redirect to organiser dashboard
+    function goBack() {
+      window.location.href = "dashboard1.html";
+    }
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('role');
+      window.location.href = 'index.html';
+    });
+
+    // Sample notifications
+    const notifications = [
+      {
+        icon: "fa-calendar-plus",
+        title: "New Event Created",
+        message: "You successfully created 'Tech Expo 2025'.",
+        time: "2 mins ago"
+      },
+      {
+        icon: "fa-user-check",
+        title: "New Guest Registered",
+        message: "John Banda has RSVP'd for 'Charity Gala 2025'.",
+        time: "10 mins ago"
+      },
+      {
+        icon: "fa-envelope",
+        title: "Message Received",
+        message: "You have a new message from an attendee.",
+        time: "1 hour ago"
+      },
+      {
+        icon: "fa-chart-line",
+        title: "Report Ready",
+        message: "Your attendance report for 'Music Festival' is available.",
+        time: "2 hours ago"
+      }
+    ];
+
+    const list = document.getElementById("notificationList");
+
+    notifications.forEach(note => {
+      const li = document.createElement("li");
+      li.classList.add("notification-item");
+      li.innerHTML = `
+        <div class="icon"><i class="fa-solid ${note.icon}"></i></div>
+        <div class="content">
+          <h3>${note.title}</h3>
+          <p>${note.message}</p>
+          <span class="time">${note.time}</span>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>
