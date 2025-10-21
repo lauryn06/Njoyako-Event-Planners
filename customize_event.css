@@ -1,0 +1,126 @@
+:root {
+    --primary: #4b6cb7;
+    --secondary: #182848;
+    --bg: #f5f6fa;
+    --card-bg: #fff;
+    --text-dark: #333;
+    --radius: 1rem;
+  }
+  
+  body {
+    background: var(--bg);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .navbar h1 {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .navbar button {
+    background: #fff;
+    color: var(--secondary);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar button:hover {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  /* Form Container */
+  .form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  .btn, .form-group button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .btn:hover, .form-group button:hover {
+    background: var(--secondary);
+  }
+  
+  #message {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    background: #eee;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
