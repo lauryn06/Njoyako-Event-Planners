@@ -89,7 +89,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const role = localStorage.getItem('role') || 'user';
       if (role !== 'organiser') {
-        window.location.href = 'dashboard1.html';
+        window.location.href = 'dashboard.html';
         return;
       }
 
@@ -109,7 +109,7 @@
 
       // Back button
       document.getElementById('backBtn').addEventListener('click', () => {
-        window.location.href = 'dashboard2.html';
+        window.location.href = 'dashboard1.html';
       });
 
       // Generate report

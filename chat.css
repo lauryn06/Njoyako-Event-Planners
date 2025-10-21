@@ -1,0 +1,142 @@
+:root {
+    --primary: #4b6cb7;
+    --secondary: #182848;
+    --bg: #f5f6fa;
+    --card-bg: #fff;
+    --text-dark: #333;
+    --radius: 1rem;
+  }
+  
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background: var(--bg);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  .nav-buttons button {
+    background: #fff;
+    color: var(--secondary);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-buttons button:hover {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  /* Chat Container */
+  .chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem auto;
+    max-width: 800px;
+    width: 90%;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Chat Messages */
+  .chat-box {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin: 0.8rem 0;
+    max-width: 70%;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    position: relative;
+    font-size: 0.95rem;
+  }
+  
+  .message.incoming {
+    background: #e1e8ff;
+    align-self: flex-start;
+  }
+  
+  .message.outgoing {
+    background: #d1f0ff;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  
+  .message .time {
+    display: block;
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 0.3rem;
+    text-align: right;
+  }
+  
+  /* Chat Input */
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    background: #fafafa;
+    padding: 0.8rem;
+    align-items: center;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    outline: none;
+  }
+  
+  .chat-input button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.7rem 1.4rem;
+    margin-left: 0.6rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .chat-input button:hover {
+    background: var(--secondary);
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    background: #eee;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  

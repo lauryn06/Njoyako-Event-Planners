@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbox | NJOYAKO Event Management</title>
+  <link rel="stylesheet" href="chat.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1><i class="fa-solid fa-comments"></i> Chatbox</h1>
+    <div class="nav-buttons">
+      <button onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </header>
+
+  <main class="chat-container">
+    <div class="chat-box" id="chatBox">
+      <div class="message incoming">
+        <p>Hello Organiser! How can I assist you today?</p>
+        <span class="time">10:30 AM</span>
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type your message..." />
+      <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> Send</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Redirect to organiser dashboard
+    function goBack() {
+      window.location.href = "dashboard1.html";
+    }
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('role');
+      window.location.href = 'index.html';
+    });
+
+    // Send message
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+      if (message === "") return;
+
+      const chatBox = document.getElementById('chatBox');
+
+      // Create message bubble
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message', 'outgoing');
+      msgDiv.innerHTML = `<p>${message}</p><span class="time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>`;
+
+      chatBox.appendChild(msgDiv);
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
