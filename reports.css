@@ -1,0 +1,160 @@
+:root {
+    --primary: #4b6cb7;
+    --secondary: #182848;
+    --bg: #f5f6fa;
+    --card-bg: #fff;
+    --text-dark: #333;
+    --radius: 1rem;
+  }
+  
+  body {
+    background: var(--bg);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar h1 {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .navbar button {
+    background: #fff;
+    color: var(--secondary);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .navbar button:hover {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .container h2 {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  select {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+  
+  .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    background: var(--secondary);
+  }
+  
+  /* Report Section */
+  .hidden {
+    display: none;
+  }
+  
+  .report-section {
+    margin-top: 2rem;
+  }
+  
+  .report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .card {
+    background: var(--bg);
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .card i {
+    font-size: 1.8rem;
+    color: var(--primary);
+  }
+  
+  .card h4 {
+    margin-top: 0.5rem;
+    color: var(--secondary);
+  }
+  
+  .card p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .chart-container {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  
+  .actions {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    background: #eee;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
