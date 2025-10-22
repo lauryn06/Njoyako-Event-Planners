@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile | NJOYAKO Event Management</title>
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <h1><i class="fa-solid fa-user"></i> My Profile</h1>
+    <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </header>
+
+  <main class="profile-container">
+    <section class="profile-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Avatar" class="profile-pic">
+      <h2 id="userName">Lauryn Mwase</h2>
+      <p id="userEmail">lalamwase06@email.com</p>
+
+      <form id="profileForm">
+        <label>Full Name:</label>
+        <input type="text" id="name" value="John Doe">
+
+        <label>Email:</label>
+        <input type="email" id="email" value="johndoe@email.com">
+
+        <label>Phone:</label>
+        <input type="text" id="phone" value="+265 999 123 456">
+
+        <label>Location:</label>
+        <input type="text" id="location" value="Blantyre, Malawi">
+
+        <button type="submit" class="save-btn">Save Changes</button>
+        <p id="message"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NJOYAKO Entertainment | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('message').style.color = 'green';
+      document.getElementById('message').textContent = 'Profile updated successfully!';
+    });
+  </script>
+</body>
+</html>
